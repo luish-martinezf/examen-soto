@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Outfit:wght@400;500;600&display=swap');
+
+:root {
+  font-family: 'Outfit', sans-serif;
+  color: #173f45;
+  background: #f5f1e8;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --ink: #173f45;
+  --muted: #718080;
+  --paper: #f5f1e8;
+  --panel: #fbfaf6;
+  --line: #d8d9cf;
+  --coral: #ec725c;
+  --coral-dark: #d85f4d;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, input { font: inherit; }
+a { color: inherit; }
+
+#root { min-height: 100vh; }

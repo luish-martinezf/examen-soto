@@ -1,0 +1,233 @@
+@import "tailwindcss";
+@import "tailwindcss-primeui";
+
+.login-page {
+    display: grid;
+    grid-template-columns: minmax(340px, 0.95fr) minmax(420px, 1.05fr);
+    min-height: 100vh;
+    background: var(--paper);
+}
+
+.login-aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(2rem, 6vw, 6.5rem);
+    color: #f5f1e8;
+    background: var(--ink);
+}
+
+.aside-kicker,
+.issue-label,
+.eyebrow,
+.aside-footer {
+    margin: 0;
+    font-family: "DM Mono", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.issue-label {
+    color: #8db3b2;
+}
+.login-aside h1 {
+    max-width: 560px;
+    margin: 1.5rem 0;
+    font-family: "Newsreader", Georgia, serif;
+    font-size: clamp(3.5rem, 6vw, 6.5rem);
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: -0.055em;
+}
+.aside-copy {
+    max-width: 330px;
+    color: #b5ccca;
+    font-size: 1.05rem;
+    line-height: 1.55;
+}
+.aside-footer {
+    color: #8db3b2;
+}
+
+.login-panel {
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    background: var(--panel);
+}
+.login-form-wrap {
+    width: min(100%, 410px);
+}
+.eyebrow {
+    color: var(--coral-dark);
+}
+.login-form-wrap h2 {
+    margin: 1.2rem 0 0.65rem;
+    color: var(--ink);
+    font-family: "Newsreader", Georgia, serif;
+    font-size: clamp(2.5rem, 4vw, 4.2rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+}
+.form-intro {
+    margin: 0;
+    max-width: 330px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+.login-form {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+}
+.field-group {
+    display: grid;
+    gap: 0.45rem;
+}
+.field-group label {
+    color: var(--ink);
+    font-size: 0.84rem;
+    font-weight: 600;
+}
+.field-group .p-inputtext,
+.field-group .p-password,
+.field-group .p-password-input {
+    width: 100%;
+}
+.field-group .p-inputtext,
+.field-group .p-password-input {
+    border-color: var(--line);
+    border-radius: 2px;
+    background: #fff;
+    box-shadow: none;
+}
+.field-group .p-inputtext:enabled:focus,
+.field-group .p-password-input:enabled:focus {
+    border-color: var(--ink);
+    box-shadow: 0 0 0 2px rgba(23, 63, 69, 0.12);
+}
+.login-form .p-button {
+    justify-content: center;
+    border: 0;
+    border-radius: 2px;
+    background: var(--coral);
+}
+.login-form .p-button:enabled:hover {
+    background: var(--coral-dark);
+}
+.field-error,
+.form-error {
+    color: #b8443d;
+    font-size: 0.78rem;
+}
+.form-error {
+    margin: 0;
+    padding: 0.75rem;
+    border-left: 2px solid #b8443d;
+    background: #fff0ed;
+}
+.login-hint {
+    margin: 1.5rem 0 0;
+    color: var(--muted);
+    font-family: "DM Mono", monospace;
+    font-size: 0.68rem;
+}
+
+.app-shell {
+    min-height: 100vh;
+    background: var(--paper);
+}
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem clamp(1.25rem, 5vw, 5rem);
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+}
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--ink);
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+.brand-mark {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    color: var(--panel);
+    background: var(--coral);
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 1.5rem;
+}
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.user-greeting {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+.topbar .p-button {
+    color: var(--ink);
+}
+.app-content {
+    padding: clamp(2rem, 6vw, 5rem);
+}
+.page-placeholder {
+    max-width: 780px;
+}
+.page-placeholder h1 {
+    margin: 0.9rem 0;
+    font-family: "Newsreader", Georgia, serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+}
+.page-placeholder p:last-child {
+    color: var(--muted);
+}
+
+@media (max-width: 760px) {
+    .login-page {
+        grid-template-columns: 1fr;
+    }
+    .login-aside {
+        min-height: 330px;
+        padding: 2rem 1.5rem;
+    }
+    .login-aside h1 {
+        margin: 2rem 0 1rem;
+        font-size: clamp(3.3rem, 15vw, 5rem);
+    }
+    .aside-copy {
+        display: none;
+    }
+    .login-panel {
+        min-height: 560px;
+        padding: 3rem 1.5rem;
+    }
+    .topbar {
+        padding: 1rem 1.25rem;
+    }
+    .user-greeting {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
