@@ -167,8 +167,6 @@ export function PostsFilters({
           <Select.Portal>
             <Select.Positioner>
               <Select.Popup>
-                <Select.Arrow />
-
                 <Select.List>
                   {allTags.map((tag, index) => (
                     <Select.Option

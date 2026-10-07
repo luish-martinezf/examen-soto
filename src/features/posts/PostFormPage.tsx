@@ -17,11 +17,12 @@ import type { SelectValueChangeEvent } from "@primereact/ui/select";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { createPost, fetchPosts, updatePost } from "./postsSlice";
 import { fetchUsers } from "../users/usersSlice";
+import { ChevronDown } from "@primeicons/react";
 
 interface PostFormValues {
   title: string;
   body: string;
-  userId: number;
+  userId: number | null;
 }
 
 export function PostFormPage() {
@@ -45,7 +46,7 @@ export function PostFormPage() {
     reset,
     formState: { errors },
   } = useForm<PostFormValues>({
-    defaultValues: { title: "", body: "", userId: 1 },
+    defaultValues: { title: "", body: "", userId: null },
   });
 
   useEffect(() => {
@@ -70,7 +71,14 @@ export function PostFormPage() {
   }
 
   async function onSubmit(values: PostFormValues) {
-    const payload = { ...values, tags };
+    if (values.userId === null) return;
+
+    const payload = {
+      title: values.title,
+      body: values.body,
+      userId: values.userId,
+      tags,
+    };
     const result =
       postId && post
         ? await dispatch(updatePost({ id: postId, payload }))
@@ -162,22 +170,27 @@ export function PostFormPage() {
             rules={{ required: "Selecciona un usuario." }}
             render={({ field }) => (
               <Select.Root
-                value={String(field.value)}
+                value={field.value == null ? "" : String(field.value)}
                 options={users.map((user) => ({
                   label: `${user.firstName} ${user.lastName}`,
                   value: String(user.id),
                 }))}
                 optionLabel="label"
                 optionValue="value"
-                onValueChange={(event: SelectValueChangeEvent) =>
-                  field.onChange(Number(event.value))
-                }
+                onValueChange={(event: SelectValueChangeEvent) => {
+                  const value = event.value;
+                  field.onChange(
+                    value === null || value === "" ? null : Number(value),
+                  );
+                }}
                 // variant="outlined"
                 fluid
               >
                 <Select.Trigger id="userId" type="button">
                   <Select.Value placeholder="Selecciona un usuario" />
-                  <Select.Indicator />
+                  <Select.Indicator>
+                    <ChevronDown />
+                  </Select.Indicator>
                 </Select.Trigger>
                 <Select.Portal>
                   <Select.Positioner>
