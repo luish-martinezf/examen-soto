@@ -16,13 +16,15 @@ const primereact = {
       cssLayer: {
         name: "primereact",
         order: "theme, base, primereact",
+        darkModeSelector: "system",
+        cssLayer: false,
+        cssVariables: true,
+        scoped: false,
       },
     },
   },
   license: import.meta.env.VITE_PRIME_REACT_LICENSE,
 };
-
-console.log(import.meta.env.VITE_PRIME_REACT_LICENSE);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

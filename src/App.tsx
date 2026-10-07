@@ -9,6 +9,8 @@ import {
 import { useAppSelector } from "./app/hooks";
 import { AppShell } from "./components/AppShell";
 import { LoginPage } from "./features/auth/LoginPage";
+import { PostFormPage } from "./features/posts/PostFormPage";
+import { PostsPage } from "./features/posts/PostsPage";
 
 function ProtectedRoute() {
   const token = useAppSelector((state) => state.auth.token);
@@ -22,16 +24,6 @@ function PublicRoute() {
   return token ? <Navigate to="/posts" replace /> : <Outlet />;
 }
 
-function PostsPlaceholder() {
-  return (
-    <section className="page-placeholder">
-      <p className="eyebrow">Workspace</p>
-      <h1>Publicaciones</h1>
-      <p>La biblioteca editorial estará lista en la siguiente fase.</p>
-    </section>
-  );
-}
-
 function App() {
   return (
     <BrowserRouter>
@@ -41,7 +33,9 @@ function App() {
         </Route>
         <Route element={<ProtectedRoute />}>
           <Route element={<AppShell />}>
-            <Route path="/posts" element={<PostsPlaceholder />} />
+            <Route path="/posts" element={<PostsPage />} />
+            <Route path="/posts/new" element={<PostFormPage />} />
+            <Route path="/posts/:id/edit" element={<PostFormPage />} />
             <Route path="/" element={<Navigate to="/posts" replace />} />
           </Route>
         </Route>

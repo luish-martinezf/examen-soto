@@ -14,7 +14,7 @@ export function AppShell() {
   }
 
   return (
-    <div className="app-shell">
+    <>
       <header className="topbar">
         <NavLink className="brand" to="/posts" aria-label="Editorial, inicio">
           <span className="brand-mark">E</span>
@@ -34,6 +34,6 @@ export function AppShell() {
       <main className="app-content">
         <Outlet />
       </main>
-    </div>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { Button } from "primereact/button";
+import { Button } from "@primereact/ui/button";
 import { InputText } from "primereact/inputtext";
 import {
   InputPassword,
@@ -116,7 +116,7 @@ export function LoginPage() {
             <Button
               type="submit"
               disabled={isLoading}
-              className="flex justify-center gap-2 !rounded-md !border-0 !bg-[var(--coral)] !px-5 !py-3 !font-semibold !text-white shadow-sm transition hover:!bg-[var(--coral-dark)] hover:shadow-md focus:!ring-2 focus:!ring-[var(--coral)] focus:!ring-offset-2 disabled:!opacity-60"
+              className="flex justify-center gap-2 !px-5 !py-3"
             >
               {isLoading ? "Validando..." : "Entrar al espacio"}
               {isLoading && <Spinner className="animate-spin" />}
