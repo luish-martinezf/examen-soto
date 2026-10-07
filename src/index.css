@@ -7,8 +7,8 @@
 
 :root {
     font-family: "Outfit", sans-serif;
-    color: #173f45;
-    background: #f5f1e8;
+    color: var(--p-text-color);
+    background: var(--p-surface-50);
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -22,12 +22,27 @@
     --p-dialog-footer-gap: 1rem;
 }
 
+.dark {
+    --paper: var(--p-surface-950);
+    --panel: var(--p-surface-900);
+    --line: var(--p-surface-700);
+    --ink: var(--p-surface-0);
+    --muted: var(--p-surface-300);
+}
+
 * {
     box-sizing: border-box;
 }
 body {
     margin: 0;
     min-width: 320px;
+    color: var(--p-text-color);
+    background: var(--p-surface-50);
+}
+
+.dark body,
+.dark #root {
+    background: var(--p-surface-950);
 }
 button,
 input {
@@ -39,4 +54,11 @@ a {
 
 #root {
     min-height: 100vh;
+    background: var(--p-surface-50);
+}
+
+[data-scope="select"][data-part="list"] {
+    max-height: min(24rem, var(--px-available-height, 60vh));
+    overflow-y: auto;
+    overscroll-behavior: contain;
 }

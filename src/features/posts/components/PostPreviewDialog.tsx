@@ -43,7 +43,7 @@ export function PostPreviewDialog({ post, onClose }: PostPreviewDialogProps) {
                 {post?.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-[#e4eeeb] px-3 py-1 text-xs text-[var(--ink)]"
+                    className="rounded-full bg-[var(--p-highlight-background)] px-3 py-1 text-xs text-[var(--p-highlight-color)]"
                   >
                     {tag}
                   </span>

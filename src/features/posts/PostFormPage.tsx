@@ -172,10 +172,10 @@ export function PostFormPage() {
                 onValueChange={(event: SelectValueChangeEvent) =>
                   field.onChange(Number(event.value))
                 }
-                variant="outlined"
+                // variant="outlined"
                 fluid
               >
-                <Select.Trigger id="userId">
+                <Select.Trigger id="userId" type="button">
                   <Select.Value placeholder="Selecciona un usuario" />
                   <Select.Indicator />
                 </Select.Trigger>
@@ -244,22 +244,19 @@ export function PostFormPage() {
         <div className="flex justify-end gap-3 pt-2">
           <Button
             type="button"
-            label="Cancelar"
             variant="text"
             severity="secondary"
             onClick={() => navigate("/posts")}
-          />
-          <Button
-            type="submit"
-            label={
-              isSaving
-                ? "Guardando…"
-                : postId
-                  ? "Guardar cambios"
-                  : "Crear publicación"
-            }
-            disabled={isSaving}
-          />
+          >
+            Cancelar
+          </Button>
+          <Button type="submit" disabled={isSaving}>
+            {isSaving
+              ? "Guardando…"
+              : postId
+                ? "Guardar cambios"
+                : "Crear publicación"}
+          </Button>
         </div>
       </form>
     </section>

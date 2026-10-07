@@ -1,7 +1,8 @@
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
-import { Button } from "primereact/button";
+import { Button } from "@primereact/ui/button";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { logout } from "../features/auth/authSlice";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function AppShell() {
   const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ export function AppShell() {
         </NavLink>
         <div className="topbar-actions">
           <span className="user-greeting">{user?.firstName ?? "Editor"}</span>
+          <ThemeToggle />
           <Button
             icon="pi pi-sign-out"
             onClick={handleLogout}

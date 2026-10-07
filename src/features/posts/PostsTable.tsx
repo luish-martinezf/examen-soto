@@ -96,7 +96,7 @@ export function PostsTable({
                           {item.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="rounded-full bg-[#e4eeeb] px-2 py-1 text-xs text-[var(--ink)]"
+                              className="rounded-full bg-[var(--p-highlight-background)] px-2 py-1 text-xs text-[var(--p-highlight-color)]"
                             >
                               {tag}
                             </span>
@@ -104,8 +104,8 @@ export function PostsTable({
                         </div>
                       </DataTable.Cell>
                       <DataTable.Cell>
-                        ♥ {item.reactions.likes} · {item.reactions.dislikes}{" "}
-                        dislikes
+                        ♥ {item.reactions?.likes || 0} ·{" "}
+                        {item.reactions?.dislikes || 0} dislikes
                       </DataTable.Cell>
                       <DataTable.Cell>
                         <div className="flex justify-end gap-1">

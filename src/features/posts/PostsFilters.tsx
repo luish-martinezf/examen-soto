@@ -110,7 +110,7 @@ export function PostsFilters({
               <Select.Positioner>
                 <Select.Popup className="z-50 w-[min(20rem,calc(100vw-2rem))]">
                   <Select.Filter placeholder="Buscar usuario..." />
-                  <Select.List className="max-h-[min(60vh,24rem)] overflow-y-auto" />
+                  <Select.List />
                   <Select.Empty className="px-3 py-2 text-sm text-[var(--muted)]">
                     No se encontraron usuarios.
                   </Select.Empty>
@@ -169,7 +169,7 @@ export function PostsFilters({
               <Select.Popup>
                 <Select.Arrow />
 
-                <Select.List className="max-h-[min(60vh,24rem)] overflow-y-auto">
+                <Select.List>
                   {allTags.map((tag, index) => (
                     <Select.Option
                       key={tag}

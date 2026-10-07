@@ -8,6 +8,9 @@ import "primeflex/primeflex.css";
 import "./index.css";
 import App from "./App.tsx";
 import { store } from "./app/store";
+import { initializeTheme } from "./theme/theme";
+
+initializeTheme();
 
 const primereact = {
   theme: {
@@ -16,7 +19,7 @@ const primereact = {
       cssLayer: {
         name: "primereact",
         order: "theme, base, primereact",
-        darkModeSelector: "system",
+        darkModeSelector: ".dark",
         cssLayer: false,
         cssVariables: true,
         scoped: false,

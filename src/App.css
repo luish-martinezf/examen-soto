@@ -10,8 +10,8 @@
     flex-direction: column;
     justify-content: space-between;
     padding: clamp(2rem, 6vw, 6.5rem);
-    color: #f5f1e8;
-    background: var(--ink);
+    color: var(--p-primary-contrast-color);
+    background: var(--p-primary-color);
 }
 
 .aside-kicker,
@@ -26,7 +26,7 @@
 }
 
 .issue-label {
-    color: #8db3b2;
+    color: var(--p-primary-contrast-color);
 }
 .login-aside h1 {
     max-width: 560px;
@@ -39,12 +39,12 @@
 }
 .aside-copy {
     max-width: 330px;
-    color: #b5ccca;
+    color: var(--p-primary-contrast-color);
     font-size: 1.05rem;
     line-height: 1.55;
 }
 .aside-footer {
-    color: #8db3b2;
+    color: var(--p-primary-contrast-color);
 }
 
 .login-panel {
@@ -91,14 +91,14 @@
 
 .field-error,
 .form-error {
-    color: #b8443d;
+    color: var(--p-red-500);
     font-size: 0.78rem;
 }
 .form-error {
     margin: 0;
     padding: 0.75rem;
-    border-left: 2px solid #b8443d;
-    background: #fff0ed;
+    border-left: 2px solid var(--p-red-500);
+    background: color-mix(in srgb, var(--p-red-500) 10%, transparent);
 }
 .login-hint {
     margin: 1.5rem 0 0;

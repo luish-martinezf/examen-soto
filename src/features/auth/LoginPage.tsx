@@ -69,7 +69,7 @@ export function LoginPage() {
                 id="username"
                 autoComplete="username"
                 invalid={Boolean(errors.username)}
-                className="!w-full !rounded-md !border-slate-300 !bg-white !px-4 !py-3 !text-[var(--ink)] shadow-sm transition focus:!border-[var(--ink)] focus:!ring-2 focus:!ring-[rgba(23,63,69,0.12)]"
+                className="!w-full !rounded-md !border-slate-300 !bg-[var(--panel)] !px-4 !py-3 !text-[var(--ink)] shadow-sm transition focus:!border-[var(--ink)] focus:!ring-2 focus:!ring-[rgba(23,63,69,0.12)]"
                 {...register("username", { required: "Ingresa tu usuario." })}
               />
               {errors.username && (
@@ -88,7 +88,7 @@ export function LoginPage() {
                     setMask(e.value)
                   }
                   invalid={Boolean(errors.password)}
-                  className="!w-full !rounded-md !border-slate-300 !bg-white !px-4 !py-3 !text-[var(--ink)] shadow-sm transition focus:!border-[var(--ink)] focus:!ring-2 focus:!ring-[rgba(23,63,69,0.12)]"
+                  className="!w-full !rounded-md !border-slate-300 !bg-[var(--panel)] !px-4 !py-3 !text-[var(--ink)] shadow-sm transition focus:!border-[var(--ink)] focus:!ring-2 focus:!ring-[rgba(23,63,69,0.12)]"
                   {...register("password", {
                     required: "Ingresa tu contraseña.",
                   })}
