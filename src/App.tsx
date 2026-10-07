@@ -5,17 +5,60 @@ import {
   Outlet,
   Route,
   Routes,
+  useNavigate,
 } from "react-router-dom";
-import { useAppSelector } from "./app/hooks";
+import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { AppShell } from "./components/AppShell";
 import { LoginPage } from "./features/auth/LoginPage";
 import { PostFormPage } from "./features/posts/PostFormPage";
 import { PostsPage } from "./features/posts/PostsPage";
+import { fetchUserInfo, logout } from "./features/auth/authSlice";
+import { useEffect } from "react";
 
 function ProtectedRoute() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const token = useAppSelector((state) => state.auth.token);
+  const user = useAppSelector((state) => state.auth.user);
 
-  return token ? <Outlet /> : <Navigate to="/login" replace />;
+  useEffect(() => {
+    const validateSession = async () => {
+      // If no token, redirect to login
+      if (!token) {
+        navigate("/login", { replace: true });
+        return;
+      }
+
+      // If user already in state, session is valid - render outlet
+      if (user) {
+        return;
+      }
+
+      // Otherwise, fetch user info from /auth/me to validate token
+      // This reuses the existing fetchUserInfo thunk logic
+      const result = await dispatch(fetchUserInfo());
+
+      // If fetchUserInfo was fulfilled, user is now in state
+      if (result.type === fetchUserInfo.fulfilled.type) {
+        return;
+      }
+
+      // If fetchUserInfo rejected, token is invalid - clear session
+      localStorage.removeItem("examen-soto-token");
+      dispatch(logout());
+      navigate("/login?expired=true", { replace: true });
+    };
+
+    validateSession();
+  }, [token, user, dispatch, navigate]);
+
+  // If still no token or user, redirect to login
+  if (!useAppSelector((state) => state.auth.token)) {
+    return <Navigate to="/login" replace />;
+  }
+
+  // User validated - render protected content
+  return <Outlet />;
 }
 
 function PublicRoute() {

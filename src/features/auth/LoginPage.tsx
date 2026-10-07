@@ -8,6 +8,7 @@ import {
 } from "primereact/inputpassword";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { login } from "./authSlice";
+import { fetchUserInfo } from "./authSlice";
 import type { LoginCredentials } from "./authTypes";
 import { IconField } from "primereact/iconfield";
 import { useState } from "react";
@@ -28,10 +29,15 @@ export function LoginPage() {
   });
 
   async function onSubmit(credentials: LoginCredentials) {
-    const result = await dispatch(login(credentials));
+    const loginResult = await dispatch(login(credentials));
 
-    if (login.fulfilled.match(result)) {
-      navigate("/posts", { replace: true });
+    if (loginResult.type === login.fulfilled.type) {
+      // Fetch user info after successful login
+      const userResult = await dispatch(fetchUserInfo());
+
+      if (userResult.type === fetchUserInfo.fulfilled.type) {
+        navigate("/posts", { replace: true });
+      }
     }
   }
 

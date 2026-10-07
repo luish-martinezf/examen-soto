@@ -1,6 +1,6 @@
 export type ThemeMode = "light" | "dark";
 
-export const THEME_STORAGE_KEY = "editorial-theme";
+export const THEME_STORAGE_KEY = "examen-soto-theme";
 
 export function getInitialTheme(): ThemeMode {
   const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
