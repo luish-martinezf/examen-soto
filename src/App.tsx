@@ -8,7 +8,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
-import { AppShell } from "./components/AppShell";
+import { AppShell } from "./components/layout/AppShell";
 import { LoginPage } from "./features/auth/LoginPage";
 import { PostFormPage } from "./features/posts/PostFormPage";
 import { PostsPage } from "./features/posts/PostsPage";
