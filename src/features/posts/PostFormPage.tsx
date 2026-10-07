@@ -7,6 +7,7 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@primereact/ui/button";
+import { Chip } from "@primereact/ui/chip";
 import { InputText } from "@primereact/ui/inputtext";
 import { InputTags } from "@primereact/ui/inputtags";
 import type { InputTagsRootValueChangeEvent } from "@primereact/ui/inputtags";
@@ -17,7 +18,7 @@ import type { SelectValueChangeEvent } from "@primereact/ui/select";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { createPost, fetchPosts, updatePost } from "./postsSlice";
 import { fetchUsers } from "../users/usersSlice";
-import { ChevronDown } from "@primeicons/react";
+import { ChevronDown, Times } from "@primeicons/react";
 
 interface PostFormValues {
   title: string;
@@ -220,16 +221,12 @@ export function PostFormPage() {
           >
             <InputTags.Items>
               {({ item, remove, itemProps }) => (
-                <span {...itemProps} className="mr-1">
-                  {item}
-                  <button
-                    type="button"
-                    onClick={remove}
-                    aria-label={`Eliminar tag ${item}`}
-                  >
-                    ×
-                  </button>
-                </span>
+                <Chip.Root {...itemProps} onRemove={remove}>
+                  <Chip.Label>{item}</Chip.Label>
+                  <Chip.Remove aria-label={`Eliminar tag ${item}`}>
+                    <Times />
+                  </Chip.Remove>
+                </Chip.Root>
               )}
             </InputTags.Items>
             <InputTags.Control>
