@@ -1,4 +1,9 @@
-import { ChevronLeft, ChevronRight } from "@primeicons/react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  SearchMinus,
+  SearchPlus,
+} from "@primeicons/react";
 import { Button } from "@primereact/ui/button";
 import { Toolbar } from "@primereact/ui/toolbar";
 
@@ -7,6 +12,9 @@ interface PDFToolbarProps {
   numPages: number;
   onPreviousPage: () => void;
   onNextPage: () => void;
+  zoom: number;
+  onZoomIn: () => void;
+  onZoomOut: () => void;
 }
 
 export function PDFToolbar({
@@ -14,6 +22,9 @@ export function PDFToolbar({
   numPages,
   onPreviousPage,
   onNextPage,
+  zoom,
+  onZoomIn,
+  onZoomOut,
 }: PDFToolbarProps) {
   return (
     <Toolbar.Root>
@@ -46,6 +57,30 @@ export function PDFToolbar({
           onClick={onNextPage}
         >
           <ChevronRight />
+        </Button>
+
+        <Button
+          iconOnly
+          aria-label="Zoom out"
+          tooltip="Zoom out"
+          rounded
+          onClick={onZoomOut}
+          disabled={zoom <= 0.5}
+        >
+          <SearchMinus />
+        </Button>
+
+        <span>{Math.round(zoom * 100)}%</span>
+
+        <Button
+          iconOnly
+          aria-label="Zoom in"
+          tooltip="Zoom in"
+          rounded
+          onClick={onZoomIn}
+          disabled={zoom >= 2}
+        >
+          <SearchPlus />
         </Button>
       </Toolbar.Center>
 

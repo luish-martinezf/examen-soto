@@ -1,11 +1,4 @@
-import {
-  Suspense,
-  useCallback,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useResizeObserver } from "@wojtekmaj/react-hooks";
 import { ErrorBoundary } from "react-error-boundary";
 import { Document, Page, pdfjs } from "react-pdf";
@@ -34,9 +27,7 @@ const maxWidth = 800;
 type PDFFile = string | File | null;
 
 export default function PDFViewer() {
-  const fileId = useId();
-
-  const [file, setFile] = useState<PDFFile>("/sample.pdf");
+  const [file] = useState<PDFFile>("/sample.pdf");
   const [numPages, setNumPages] = useState<number>();
   const [renderedPages, setRenderedPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -55,23 +46,14 @@ export default function PDFViewer() {
 
   useResizeObserver(containerRef, resizeObserverOptions, onResize);
 
-  function onFileChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    const nextFile = event.target.files?.[0];
-
-    if (nextFile) {
-      setFile(nextFile);
-      setNumPages(undefined);
-      setCurrentPage(1);
-      setRenderedPages(0);
-    }
-  }
-
   function onDocumentLoadSuccess({
     numPages: nextNumPages,
   }: PDFDocumentProxy): void {
     setNumPages(nextNumPages);
     setCurrentPage(1);
   }
+
+  // Navigation functionality
 
   function scrollToPage(pageNumber: number) {
     const container = documentContainerRef.current;
@@ -115,8 +97,6 @@ export default function PDFViewer() {
 
     const pages = container.querySelectorAll<HTMLElement>("[data-page]");
 
-    console.log("All pages rendered:", pages.length);
-
     if (pages.length !== numPages) {
       return;
     }
@@ -155,11 +135,16 @@ export default function PDFViewer() {
     };
   }, [numPages, renderedPages]);
 
-  // useEffect(() => {
-  //   if (numPages) {
-  //     scrollToPage(currentPage);
-  //   }
-  // }, [numPages]);
+  // Zoom functionality
+  const [zoom, setZoom] = useState<number>(1);
+
+  const zoomIn = () => {
+    setZoom((value) => Math.min(value + 0.1, 2));
+  };
+
+  const zoomOut = () => {
+    setZoom((value) => Math.max(value - 0.1, 0.5));
+  };
 
   return (
     <div className="Example">
@@ -170,23 +155,16 @@ export default function PDFViewer() {
             numPages={numPages}
             onPreviousPage={goToPreviousPage}
             onNextPage={goToNextPage}
+            zoom={zoom}
+            onZoomIn={zoomIn}
+            onZoomOut={zoomOut}
           />
         )}
       </header>
 
-      <div className="Example__container">
-        <div className="Example__container__load">
-          <label htmlFor={fileId}>Load from file:</label>{" "}
-          <input
-            id={fileId}
-            onChange={onFileChange}
-            type="file"
-            accept="application/pdf"
-          />
-        </div>
-
+      <div className="Example__container flex justify-center pt-2">
         <div
-          className="Example__container__document"
+          className="Example__container__document w-full max-w-full"
           ref={(element) => {
             setContainerRef(element);
             documentContainerRef.current = element;
@@ -204,19 +182,24 @@ export default function PDFViewer() {
               >
                 {Array.from(new Array(numPages), (_el, index) => {
                   const pageNumber = index + 1;
+                  const pageWidth = containerWidth
+                    ? Math.min(containerWidth, maxWidth)
+                    : maxWidth;
 
                   return (
-                    <div key={`page_${pageNumber}`} data-page={pageNumber}>
+                    <div
+                      key={`page_${pageNumber}`}
+                      data-page={pageNumber}
+                      className="scroll-mt-16 pb-3"
+                    >
                       <Page
+                        className="flex justify-center bg-transparent"
                         pageNumber={pageNumber}
                         onRenderSuccess={() => {
                           setRenderedPages((count) => count + 1);
                         }}
-                        width={
-                          containerWidth
-                            ? Math.min(containerWidth, maxWidth)
-                            : maxWidth
-                        }
+                        width={pageWidth}
+                        scale={zoom}
                       />
                     </div>
                   );
