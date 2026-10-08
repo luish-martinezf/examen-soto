@@ -14,6 +14,7 @@ import { PostFormPage } from "./features/posts/PostFormPage";
 import { PostsPage } from "./features/posts/PostsPage";
 import { fetchUserInfo, logout } from "./features/auth/authSlice";
 import { useEffect } from "react";
+import PDFViewer from "./features/docs/PDFViewer";
 
 function ProtectedRoute() {
   const dispatch = useAppDispatch();
@@ -82,6 +83,7 @@ function App() {
             <Route path="/" element={<Navigate to="/posts" replace />} />
           </Route>
         </Route>
+        <Route path="/docs" element={<PDFViewer />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

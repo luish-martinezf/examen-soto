@@ -24,8 +24,13 @@ npm run build
 
 ## Variables de entorno
 
-Crear un archivo `.env` en la raiz del proyecto con la siguiente variable de entorno, para poder usar PrimeReact:
+Crear un archivo `.env.local` en la raiz del proyecto con la siguiente variable de entorno, para poder usar PrimeReact:
 VITE_PRIME_REACT_LICENSE=xxx
+
+## Lector PDF
+
+Se uso libreria [react-pdf](https://www.npmjs.com/package/react-pdf) para poder mostrar el PDF en la pagina. Y algunos controles para poder navegar entre las paginas del PDF.
+Se encuentra en la ruta (no se necesita iniciar sesion): /doc
 
 ## Vercel
 
